@@ -1,15 +1,15 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from .models import StudentProfile, AdviserProfile
+from .models import StudentProfile, AdviserProfile, User
 
 class UserModelTests(TestCase):
     def setUp(self):
-        self.user_student = get_user_model().objects.create_user(
+        self.user_student = User.objects.create_user(
             username='student_user',
             password='testpass123',
             role='student'
         )
-        self.user_adviser = get_user_model().objects.create_user(
+        self.user_adviser = User.objects.create_user(
             username='adviser_user',
             password='testpass123',
             role='adviser'
@@ -32,8 +32,8 @@ from django.test import Client
 class UserViewsTests(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user_student = get_user_model().objects.create_user(username='student_user', password='testpass123', role='student')
-        self.user_adviser = get_user_model().objects.create_user(username='adviser_user', password='testpass123', role='adviser')
+        self.user_student = User.objects.create_user(username='student_user', password='testpass123', role='student')
+        self.user_adviser = User.objects.create_user(username='adviser_user', password='testpass123', role='adviser')
 
     def test_student_dashboard_view(self):
         self.client.login(username='student_user', password='testpass123')
