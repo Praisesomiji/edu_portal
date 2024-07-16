@@ -28,20 +28,25 @@ class UserModelTests(TestCase):
 
 from django.urls import reverse
 from django.test import Client
+from .models import User, StudentProfile, AdviserProfile
 
 class UserViewsTests(TestCase):
     def setUp(self):
         self.client = Client()
+        
         self.user_student = User.objects.create_user(username='student_user', password='testpass123', role='student')
+        self.student_profile = StudentProfile.objects.create(user=self.user_student, gpa=3.5, attendance_rate=95)
+        
         self.user_adviser = User.objects.create_user(username='adviser_user', password='testpass123', role='adviser')
-
+        self.adviser_profile = AdviserProfile.objects.create(user=self.user_adviser, department='Science')
+    
     def test_student_dashboard_view(self):
         login = self.client.login(username='student_user', password='testpass123')
         print(f"Student login successful: {login}")  # Debug statement
         response = self.client.get(reverse('student_dashboard'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/student_dashboard.html')
-
+    
     def test_adviser_dashboard_view(self):
         login = self.client.login(username='adviser_user', password='testpass123')
         print(f"Adviser login successful: {login}")  # Debug statement
