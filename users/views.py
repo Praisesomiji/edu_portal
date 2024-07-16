@@ -47,7 +47,7 @@ def student_dashboard(request):
 
 def adviser_dashboard(request):
     adviser_profile = AdviserProfile.objects.get(user=request.user)
-    advisees = User.objects.filter(student_profile__adviser=adviser_profile)
+    advisees = adviser_profile.students.all()
     context = {
         'advisees': advisees,
         'total_students': advisees.count(),

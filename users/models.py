@@ -26,6 +26,7 @@ class User(AbstractUser):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
+    adviser = models.ForeignKey("AdviserProfile", on_delete=models.SET_NULL, null=True, related_name='students')
     gpa = models.FloatField(null=True, blank=True)
     attendance_rate = models.FloatField(null=True, blank=True)
 
