@@ -42,14 +42,14 @@ class UserViewsTests(TestCase):
     
     def test_student_dashboard_view(self):
         login = self.client.login(username='student_user', password='testpass123')
-        print(f"Student login successful: {login}")  # Debug statement
+        # print(f"Student login successful: {login}")  # Debug statement
         response = self.client.get(reverse('student_dashboard'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/student_dashboard.html')
     
     def test_adviser_dashboard_view(self):
         login = self.client.login(username='adviser_user', password='testpass123')
-        print(f"Adviser login successful: {login}")  # Debug statement
+        # print(f"Adviser login successful: {login}")  # Debug statement
         response = self.client.get(reverse('adviser_dashboard'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'users/adviser_dashboard.html')
