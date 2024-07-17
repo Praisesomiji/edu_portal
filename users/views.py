@@ -1,7 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .models import User, StudentProfile, AdviserProfile
+from .models import StudentProfile, AdviserProfile
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+
+def index(request):
+    user = request.user
+    if user.is_authenticated:
+        if user.role == 'student':
+            return redirect('student_dashboard')
+        elif user.role == 'adviser':
+            return redirect('adviser_dashboard')
+    return redirect('login')
+
+#Authenticate
 
 def register(request):
     if request.method == 'POST':
@@ -34,7 +46,9 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+#Render
 
+@login_required
 def student_dashboard(request):
     student_profile = StudentProfile.objects.get(user=request.user)
     context = {
@@ -45,6 +59,7 @@ def student_dashboard(request):
     }
     return render(request, 'users/student_dashboard.html', context)
 
+@login_required
 def adviser_dashboard(request):
     adviser_profile = AdviserProfile.objects.get(user=request.user)
     advisees = adviser_profile.students.all()
