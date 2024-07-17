@@ -1,16 +1,17 @@
 ## MVP Features
 
-    - **Student Dashboard**: 
-        - Display Current GPA/CGPA.
-        - Recent grades.
-        - Attendance summary.
-        - Upcoming events and deadlines.
-        - Basic notifications.
-    - **Academic Adviser Dashboard**:
-        - List of advisees.
-        - Basic performance analytics.
-        - Communication tools.
-        - Basic reporting.
+- **Student Dashboard**: 
+    - Display Current GPA/CGPA.
+    - Recent grades.
+    - Attendance summary.
+    - Upcoming events and deadlines.
+    - Basic notifications.
+
+- **Academic Adviser Dashboard**:
+    - List of advisees.
+    - Basic performance analytics.
+    - Communication tools.
+    - Basic reporting.
 
 ## Technology Stack
 
