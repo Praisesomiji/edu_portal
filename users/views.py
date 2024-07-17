@@ -42,6 +42,7 @@ def login_view(request):
                 return redirect('adviser_dashboard')
     return render(request, 'users/login.html')
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
